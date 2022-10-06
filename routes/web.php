@@ -1,18 +1,15 @@
 <?php
 
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WordController::class, 'index']);
+Route::post('/stack/add', [WordController::class, 'push']);
+Route::get('/stack/get', [WordController::class, 'pull']);
+
+Route::get('/store', [StoreController::class, 'index']);
+Route::post('/store', [StoreController::class, 'create']);
+Route::get('/store/{key}', [StoreController::class, 'show']);
+Route::get('/store/delete/{key}', [StoreController::class, 'delete']);
